@@ -1,0 +1,377 @@
+/* ==========================================================================
+   REJECTED CANDIDATES PAGE - EXACT CARD LAYOUT MATCHING SCREENSHOT
+   ========================================================================== */
+
+.card-rejected-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #0f172a;
+}
+
+/* Page Header */
+.card-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-page-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.card-page-subtitle {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Search & Filters Toolbar Card */
+.card-filter-toolbar {
+  border: 1.5px solid #2870A8;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.card-search-wrap {
+  flex: 1 1 320px;
+  border: 1.5px solid #2870A8;
+  border-radius: 8px;
+  background: #ffffff;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  min-width: 220px;
+}
+
+.card-search-icon {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.card-search-input {
+  width: 100%;
+  border: none !important;
+  outline: none !important;
+  font-size: 0.88rem !important;
+  color: #0f172a !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.card-search-input::placeholder {
+  color: #64748b;
+  opacity: 0.85;
+}
+
+.card-filter-select {
+  height: 42px !important;
+  border: 1.5px solid #2870A8 !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  padding: 0 36px 0 14px !important;
+  outline: none;
+  cursor: pointer;
+  min-width: 155px;
+  box-sizing: border-box;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg stroke='%232870A8' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 15px !important;
+}
+
+.card-refresh-btn {
+  height: 42px !important;
+  padding: 0 18px !important;
+  border: 1.5px solid #2870A8 !important;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  color: #2870A8 !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.card-refresh-btn:hover {
+  background-color: #F0F7FF !important;
+  border-color: #1D4ED8 !important;
+}
+
+.card-refresh-btn svg {
+  color: #2870A8 !important;
+  font-size: 1rem;
+}
+
+/* Showing Count */
+.card-showing-meta {
+  font-size: 0.88rem;
+  color: #475569;
+  padding: 0 2px;
+}
+
+.card-showing-meta strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* Candidates Card Grid */
+.card-candidates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Exact Card Container */
+.ats-rejected-card {
+  width: 100%;
+  border: 1.5px solid #2870A8;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Section 1: Profile Header Block */
+.rej-card-header-block {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1.5px solid #2870A8;
+}
+
+.rej-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rej-avatar-initial {
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid #2870A8;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2870A8;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rej-profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rej-candidate-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.rej-candidate-contact {
+  font-size: 0.76rem;
+  color: #64748b;
+  line-height: 1.2;
+}
+
+/* Status Pill */
+.rej-status-pill-wrap {
+  display: flex;
+}
+
+.rej-status-pill {
+  border: 1.5px solid #334155;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 3px 14px;
+  white-space: nowrap;
+}
+
+/* Section 2: 2x2 Info Grid Section */
+.rej-2x2-grid-section {
+  padding: 16px 20px;
+  border-bottom: 1.5px solid #2870A8;
+}
+
+.rej-2x2-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rej-meta-box {
+  border: 1.5px solid #2870A8;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  box-sizing: border-box;
+}
+
+.rej-meta-box .rej-box-lbl {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.rej-meta-box .rej-box-val {
+  font-size: 0.88rem;
+  color: #0f172a;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+/* Section 3: Reason Section */
+.rej-reason-section {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom: 1.5px solid #2870A8;
+}
+
+.rej-reason-lbl {
+  font-size: 0.74rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.rej-reason-box {
+  border: 1.5px solid #2870A8;
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: #ffffff;
+  font-size: 0.86rem;
+  color: #0f172a;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* Section 4: Action Button Section */
+.rej-actions-section {
+  padding: 16px 20px;
+}
+
+.rej-btn-details {
+  width: 100%;
+  height: 38px;
+  background: #ffffff !important;
+  color: #2870A8 !important;
+  border: 1.5px solid #2870A8 !important;
+  border-radius: 8px !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.rej-btn-details svg {
+  color: #2870A8 !important;
+  stroke: #2870A8 !important;
+  fill: none !important;
+  font-size: 0.95rem;
+}
+
+.rej-btn-details:hover {
+  background-color: #F0F7FF !important;
+  border-color: #1D4ED8 !important;
+}
+
+/* State Messages & Spinner */
+.card-state-msg {
+  grid-column: 1 / -1;
+  padding: 40px;
+  color: #64748b;
+  font-size: 14px;
+  text-align: center;
+}
+
+.card-state-msg.error {
+  color: #ef4444;
+}
+
+.spin-icon {
+  animation: spinRotate 1s linear infinite;
+}
+
+@keyframes spinRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
+  .card-filter-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .card-search-wrap {
+    width: 100%;
+  }
+
+  .card-filter-select,
+  .card-refresh-btn {
+    width: 100%;
+  }
+}

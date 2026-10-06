@@ -1,0 +1,159 @@
+/* ==========================================================
+   HRSettings.css — HR Workspace Settings Layout Theme
+========================================================== */
+
+.hr-settings-layout-page {
+  padding: 24px 32px 60px;
+  background-color: #ffffff;
+  min-height: calc(100vh - 75px);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #0f172a;
+}
+
+.hr-settings-header-block {
+  margin-bottom: 24px;
+}
+
+.hr-settings-main-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.hr-settings-main-subtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Card Container */
+.hr-settings-card-box {
+  width: 100%;
+  max-width: 800px;
+  border: 1.5px solid #2870A8;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Top Section */
+.hr-settings-section-top {
+  padding: 20px 24px;
+  border-bottom: 1px solid #2870A8;
+  background: #ffffff;
+}
+
+.settings-section-heading {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.settings-section-desc {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Form Body Section */
+.hr-settings-section-body {
+  padding: 22px 24px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-input-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.settings-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-input-number-wrap {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #2870A8;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 0 12px;
+  height: 40px;
+  width: 110px;
+}
+
+.settings-number-input {
+  width: 100%;
+  border: none !important;
+  outline: none !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.settings-number-input::-webkit-inner-spin-button,
+.settings-number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.settings-percent-unit {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.settings-match-text {
+  font-size: 13.5px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.settings-helper-hint {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Save Button */
+.hr-settings-btn-row {
+  padding: 0 24px 22px 24px;
+  background: #ffffff;
+}
+
+.hr-settings-submit-btn {
+  height: 38px;
+  padding: 0 22px;
+  background: #2870A8 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #2870A8 !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hr-settings-submit-btn:hover {
+  background-color: #1e5a88 !important;
+}
+
+.hr-settings-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

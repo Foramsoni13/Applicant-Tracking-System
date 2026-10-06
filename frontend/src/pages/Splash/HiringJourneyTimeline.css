@@ -1,0 +1,288 @@
+ /* ATS Journey Container */
+.ats-journey {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* Active Stage Highlight Card */
+.ats-journey-card-active {
+  width: 100%;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 1.5px solid #d6e9f2;
+  border-radius: 16px;
+
+  padding: 14px 20px;
+
+  box-shadow:
+    0 12px 30px rgba(36, 130, 193, 0.10),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+
+  animation: stageCardPop 0.4s ease-out;
+
+  text-align: left;
+}
+
+@keyframes stageCardPop {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Header */
+.ats-journey-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Stage Icon */
+.ats-journey-icon-wrap {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 14px;
+  border: 1.5px solid #b7d8ea;
+
+  background: #f5fbfe;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  box-shadow: 0 4px 12px rgba(36, 130, 193, 0.08);
+}
+
+.ats-journey-icon {
+  font-size: 22px;
+  color: #2482c1;
+}
+
+/* Text */
+.ats-journey-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ats-journey-badge-pill {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #2482c1;
+}
+
+.ats-journey-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ats-journey-detail {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* =========================
+   4-Step Stepper
+========================= */
+
+.ats-stepper-track {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 0 4px;
+}
+
+/* Individual Node */
+.ats-stepper-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 6px;
+
+  position: relative;
+  z-index: 2;
+
+  flex-shrink: 0;
+}
+
+/* Step Circle */
+.ats-stepper-dot {
+  width: 26px;
+  height: 26px;
+
+  border-radius: 50%;
+
+  background: #f5f8fa;
+  border: 2px solid #cbd5e1;
+
+  color: #64748b;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Step Label */
+.ats-stepper-label {
+  font-size: 10px;
+  font-weight: 700;
+
+  color: #64748b;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.3s ease,
+    font-weight 0.3s ease;
+}
+
+/* =========================
+   Active Step
+========================= */
+
+.ats-stepper-node.active .ats-stepper-dot {
+  background: #2482c1;
+  border-color: #2482c1;
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0 4px rgba(36, 130, 193, 0.12),
+    0 4px 10px rgba(36, 130, 193, 0.18);
+
+  transform: scale(1.08);
+}
+
+.ats-stepper-node.active .ats-stepper-label {
+  color: #2482c1;
+  font-weight: 800;
+}
+
+/* =========================
+   Completed Step
+========================= */
+
+.ats-stepper-node.done .ats-stepper-dot {
+  background: #d6e9f2;
+  border-color: #2482c1;
+  color: #2482c1;
+}
+
+.ats-stepper-node.done .ats-stepper-label {
+  color: #2482c1;
+  font-weight: 700;
+}
+
+/* =========================
+   Connecting Line
+========================= */
+
+.ats-stepper-line {
+  flex: 1;
+
+  height: 2px;
+
+  background: #dbe7ed;
+
+  margin: 13px 8px 0;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+/* Completed Connection */
+.ats-stepper-line.filled {
+  background: #b7d8ea;
+  box-shadow: none;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 480px) {
+  .ats-journey-card-active {
+    padding: 13px 14px;
+    border-radius: 14px;
+  }
+
+  .ats-journey-card-header {
+    gap: 11px;
+  }
+
+  .ats-journey-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .ats-journey-icon {
+    font-size: 19px;
+  }
+
+  .ats-journey-title {
+    font-size: 14px;
+  }
+
+  .ats-journey-detail {
+    font-size: 11px;
+  }
+
+  .ats-stepper-label {
+    font-size: 8px;
+  }
+
+  .ats-stepper-dot {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+
+  .ats-stepper-line {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 11px;
+  }
+}

@@ -1,0 +1,908 @@
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import CandidateNavbar from "../CandidateNavbar";
+import "./ResumeUpload.css";
+
+
+// ==========================================
+// HELPER UTILITIES
+// ==========================================
+
+const getScoreColor = (score) => {
+  if (score >= 80) return "#16a34a";
+  if (score >= 60) return "#2563eb";
+  if (score >= 40) return "#ea580c";
+  return "#dc2626";
+};
+
+const getScoreLabel = (score) => {
+  if (score >= 90) return "Excellent";
+  if (score >= 75) return "Qualified";
+  if (score >= 60) return "Partially Qualified";
+  return "Not Qualified";
+};
+
+const getScoreBadgeClass = (score) => {
+  if (score >= 75) return "badge-green";
+  if (score >= 60) return "badge-blue";
+  if (score >= 40) return "badge-orange";
+  return "badge-red";
+};
+
+
+// ==========================================
+// SUB-COMPONENTS
+// ==========================================
+
+/** Circular ATS score gauge */
+const ScoreGauge = ({ score }) => {
+  const radius = 54;
+  const circumference = 2 * Math.PI * radius;
+  const filled = circumference - (score / 100) * circumference;
+  const color = getScoreColor(score);
+
+  return (
+    <div className="score-gauge-wrapper">
+      <svg width="140" height="140" viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="12" />
+        <circle
+          cx="70" cy="70" r={radius}
+          fill="none"
+          stroke={color}
+          strokeWidth="12"
+          strokeDasharray={circumference}
+          strokeDashoffset={filled}
+          strokeLinecap="round"
+          transform="rotate(-90 70 70)"
+          style={{ transition: "stroke-dashoffset 1s ease" }}
+        />
+      </svg>
+      <div className="gauge-center">
+        <span className="gauge-score" style={{ color }}>{score}%</span>
+        <span className="gauge-label">Quality</span>
+      </div>
+    </div>
+  );
+};
+
+
+/** Single breakdown metric card */
+const BreakdownCard = ({ icon, label, value, max = 100 }) => {
+  const pct = max > 0 ? Math.round((value / max) * 100) : 0;
+  const color = getScoreColor(pct);
+  return (
+    <div className="breakdown-card">
+      <div className="breakdown-top">
+        <span className="breakdown-icon">{icon}</span>
+        <span className="breakdown-value" style={{ color }}>{value}<span className="breakdown-max">/{max}</span></span>
+      </div>
+      <div className="breakdown-label">{label}</div>
+      <div className="breakdown-bar-bg">
+        <div className="breakdown-bar-fill" style={{ width: `${pct}%`, background: color }} />
+      </div>
+    </div>
+  );
+};
+
+
+// ==========================================
+// MAIN COMPONENT
+// ==========================================
+
+function ResumeUpload() {
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // ---- State ----
+  const [resume, setResume]               = useState(null);
+  const [file, setFile]                   = useState(null);
+  const [uploading, setUploading]         = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [scanning, setScanning]           = useState(false);
+  const [dragActive, setDragActive]       = useState(false);
+  const [applications, setApplications]   = useState([]);
+  const [errorMsg, setErrorMsg]           = useState("");
+
+  const fileInputRef = useRef(null);
+
+
+  // ==========================================
+  // FETCH ON LOAD
+  // ==========================================
+
+  useEffect(() => {
+    if (user?._id) {
+      fetchResume();
+      fetchApplications();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+
+  const fetchResume = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5001/api/resume/candidate/${user._id}`
+      );
+      if (res.data.success) {
+        setResume(res.data.resume);
+      }
+    } catch {
+      // No resume yet — fine
+    }
+  };
+
+
+  const fetchApplications = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5001/api/applications/candidate/${user._id}`
+      );
+      if (res.data.success) {
+        setApplications(res.data.applications || []);
+      }
+    } catch {
+      // No applications yet — fine
+    }
+  };
+
+
+  // ==========================================
+  // FILE HANDLING
+  // ==========================================
+
+  const validateAndSetFile = (selected) => {
+    const allowedTypes = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    ];
+    if (!allowedTypes.includes(selected.type)) {
+      setErrorMsg("Only PDF and DOCX files are allowed.");
+      return;
+    }
+    if (selected.size > 5 * 1024 * 1024) {
+      setErrorMsg("File size must be less than 5 MB.");
+      return;
+    }
+    setErrorMsg("");
+    setFile(selected);
+  };
+
+  const handleFileChange = (e) => {
+    if (e.target.files[0]) validateAndSetFile(e.target.files[0]);
+  };
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(e.type === "dragenter" || e.type === "dragover");
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files?.[0]) validateAndSetFile(e.dataTransfer.files[0]);
+  };
+
+
+  // ==========================================
+  // UPLOAD RESUME
+  // ==========================================
+
+  const uploadResume = async () => {
+    if (!file) return;
+
+    setUploading(true);
+    setScanning(true);
+    setErrorMsg("");
+
+    try {
+      const formData = new FormData();
+      formData.append("resume", file);
+      formData.append("candidateId", user._id);
+
+      const res = await axios.post(
+        "http://localhost:5001/api/resume/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: (e) => {
+            const pct = Math.round((e.loaded * 100) / e.total);
+            setUploadProgress(pct);
+          },
+        }
+      );
+
+      if (res.data.success) {
+        setResume(res.data.resume);
+        setFile(null);
+        const updatedUser = { ...user, resume: res.data.resume.fileName };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        // Refresh applications as well (they may reference new resume)
+        fetchApplications();
+      }
+
+    } catch (error) {
+      setErrorMsg(
+        error.response?.data?.message ||
+        "Upload failed. Please try again."
+      );
+    }
+
+    setUploading(false);
+    setUploadProgress(0);
+    setScanning(false);
+  };
+
+
+  // ==========================================
+  // RE-SCAN
+  // ==========================================
+
+  const reScanResume = async () => {
+    if (!resume?._id) return;
+    setScanning(true);
+    setErrorMsg("");
+    try {
+      const res = await axios.post(
+        `http://localhost:5001/api/resume/scan/${resume._id}`
+      );
+      if (res.data.success) {
+        setResume(res.data.resume);
+      } else {
+        setErrorMsg(res.data.message || "Re-scan failed.");
+      }
+    } catch (error) {
+      setErrorMsg(error.response?.data?.message || "Re-scan failed. Please try again.");
+    }
+    setScanning(false);
+  };
+
+
+  // ==========================================
+  // DERIVED VALUES (all from backend)
+  // ==========================================
+
+  const atsScore      = resume?.atsScore    ?? 0;
+  const breakdown     = resume?.breakdown   ?? {};
+  const extractedSkills = Array.isArray(resume?.extractedSkills) ? resume.extractedSkills : (Array.isArray(resume?.skills) ? resume.skills : []);
+  const technologies  = Array.isArray(resume?.technologies)  ? resume.technologies  : [];
+  const education     = Array.isArray(resume?.education)     ? resume.education     : [];
+  const experience    = Array.isArray(resume?.experience)    ? resume.experience    : [];
+  const projects      = Array.isArray(resume?.projects)      ? resume.projects      : [];
+  const certifications = Array.isArray(resume?.certifications) ? resume.certifications : [];
+  const languages     = Array.isArray(resume?.languages)     ? resume.languages     : [];
+  const achievements  = Array.isArray(resume?.achievements)  ? resume.achievements  : [];
+  const recommendations = Array.isArray(resume?.recommendations) ? resume.recommendations : [];
+
+  const isFresher = experience.length === 1 && experience[0]?.title?.toLowerCase() === "fresher";
+  const scanComplete = resume && resume.scanStatus === "Completed";
+
+
+  // ==========================================
+  // RENDER
+  // ==========================================
+
+  return (
+    <div className="resume-wrapper">
+
+      <CandidateNavbar />
+
+      <div className="resume-container">
+
+
+        {/* ── LEFT SIDEBAR ── */}
+        <div className="resume-sidebar">
+
+
+          {/* Upload Card */}
+          <div className="upload-card">
+
+            <div className="upload-card-header">
+              <div className="upload-icon">📄</div>
+              <h2>Resume Check</h2>
+              <p>Upload your resume for AI-powered analysis</p>
+            </div>
+
+
+            <div
+              className={`dropzone ${dragActive ? "drag-active" : ""} ${file ? "has-file" : ""}`}
+              onDragEnter={handleDrag}
+              onDragLeave={handleDrag}
+              onDragOver={handleDrag}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+
+              {file ? (
+                <div className="file-preview">
+                  <div className="file-icon">
+                    {file.name.endsWith(".pdf") ? "📕" : "📘"}
+                  </div>
+                  <div className="file-info">
+                    <h4>{file.name}</h4>
+                    <p>{(file.size / 1024).toFixed(1)} KB</p>
+                  </div>
+                  <button
+                    className="remove-file"
+                    onClick={(e) => { e.stopPropagation(); setFile(null); setErrorMsg(""); }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <div className="dropzone-content">
+                  <div className="dropzone-icon">⬆️</div>
+                  <h3>Drop your resume here</h3>
+                  <p>or click to browse</p>
+                  <span className="file-types">PDF, DOC, DOCX • Max 5 MB</span>
+                </div>
+              )}
+            </div>
+
+
+            {/* Upload Progress */}
+            {uploading && uploadProgress > 0 && uploadProgress < 100 && (
+              <div className="upload-progress-container">
+                <div className="progress-text">
+                  <span>Uploading...</span>
+                  <span>{uploadProgress}%</span>
+                </div>
+                <div className="progress-bar-bg">
+                  <div className="progress-bar-fill" style={{ width: `${uploadProgress}%` }} />
+                </div>
+              </div>
+            )}
+
+
+            {/* Inline Error */}
+            {errorMsg && (
+              <div className="error-banner">
+                <span className="error-icon">⚠️</span>
+                <span>{errorMsg}</span>
+                <button className="error-dismiss" onClick={() => setErrorMsg("")}>✕</button>
+              </div>
+            )}
+
+
+            <button
+              className="upload-btn"
+              onClick={uploadResume}
+              disabled={!file || uploading}
+            >
+              {uploading ? (
+                <span className="btn-loading">
+                  <span className="spinner" />
+                  Uploading &amp; Analyzing...
+                </span>
+              ) : (
+                "Upload &amp; Analyze Resume"
+              )}
+            </button>
+
+          </div>
+
+
+          {/* Resume Status Card */}
+          {resume && (
+            <div className="status-card">
+
+              <h3>Resume Status</h3>
+
+              <div className="status-row">
+                <span className="status-label">File</span>
+                <span className="status-value" title={resume.fileName}>{resume.fileName}</span>
+              </div>
+
+              <div className="status-row">
+                <span className="status-label">Scan Status</span>
+                <span className={`scan-badge ${resume.scanStatus?.toLowerCase()}`}>
+                  {resume.scanStatus || "Pending"}
+                </span>
+              </div>
+
+              <div className="status-row">
+                <span className="status-label">Uploaded</span>
+                <span className="status-value">
+                  {new Date(resume.uploadedAt).toLocaleDateString("en-IN", {
+                    day: "numeric", month: "short", year: "numeric",
+                  })}
+                </span>
+              </div>
+
+              <div className="status-actions">
+                <a
+                  className="view-resume-link"
+                  href={`http://localhost:5001/uploads/resume/${resume.fileName}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View Resume
+                </a>
+
+                {(resume.scanStatus === "Failed" || resume.scanStatus === "Completed") && (
+                  <button
+                    className="rescan-btn"
+                    onClick={reScanResume}
+                    disabled={scanning}
+                  >
+                    {scanning ? "Scanning..." : "Re-Scan"}
+                  </button>
+                )}
+              </div>
+
+            </div>
+          )}
+
+        </div>
+
+
+        {/* ── RIGHT CONTENT ── */}
+        <div className="resume-content">
+
+
+          {/* Scanning / Loading Overlay */}
+          {scanning && (
+            <div className="scanning-overlay">
+              <div className="scanning-animation">
+                <div className="scan-line" />
+                <div className="scan-doc">📄</div>
+              </div>
+              <h3>AI is analyzing your resume...</h3>
+              <p>Extracting skills, experience, qualifications and scoring your resume</p>
+            </div>
+          )}
+
+
+          {/* Empty State — no resume uploaded yet */}
+          {!resume && !scanning && (
+            <div className="no-resume-state">
+              <div className="empty-illustration">📄</div>
+              <h2>No Resume Uploaded</h2>
+              <p>Upload your resume on the left to get an AI-powered analysis including your quality score, skill extraction, and personalized recommendations.</p>
+            </div>
+          )}
+
+
+          {/* ─── SCAN RESULTS ─── */}
+          {scanComplete && !scanning && (
+
+
+            <div className="analysis-results">
+
+
+              {/* ── ATS Quality Score + Breakdown ── */}
+              <div className="ats-score-section">
+
+                <div className="section-header">
+                  <h2>📊 Resume Quality Score</h2>
+                  <span className="ai-badge">AI Analyzed</span>
+                </div>
+
+                <div className="score-top-row">
+
+                  {/* Gauge */}
+                  <div className="score-gauge-card">
+                    <ScoreGauge score={atsScore} />
+                    <div className="score-meta">
+                      <span className={`status-badge ${getScoreBadgeClass(atsScore)}`}>
+                        {getScoreLabel(atsScore)}
+                      </span>
+                      <p className="score-description">
+                        Based on resume completeness, structure and content quality
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Breakdown Grid */}
+                  <div className="breakdown-grid">
+                    <BreakdownCard
+                      icon="🛠️"
+                      label="Skills"
+                      value={breakdown.skills ?? 0}
+                      max={40}
+                    />
+                    <BreakdownCard
+                      icon="💼"
+                      label="Experience"
+                      value={breakdown.experience ?? 0}
+                      max={20}
+                    />
+                    <BreakdownCard
+                      icon="🎓"
+                      label="Education"
+                      value={breakdown.education ?? 0}
+                      max={15}
+                    />
+                    <BreakdownCard
+                      icon="🚀"
+                      label="Projects"
+                      value={breakdown.projects ?? 0}
+                      max={15}
+                    />
+                    <BreakdownCard
+                      icon="📜"
+                      label="Certifications"
+                      value={breakdown.certifications ?? 0}
+                      max={5}
+                    />
+                    <BreakdownCard
+                      icon="✅"
+                      label="Completeness"
+                      value={breakdown.resumeCompleteness ?? 0}
+                      max={5}
+                    />
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* ── Candidate Info ── */}
+              <div className="detail-section">
+
+                <div className="section-header">
+                  <h2>👤 Candidate Information</h2>
+                </div>
+
+                <div className="info-grid">
+
+                  {resume.candidateName && (
+                    <div className="info-card">
+                      <div className="info-icon">👤</div>
+                      <div className="info-body">
+                        <label>Full Name</label>
+                        <p>{resume.candidateName}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {resume.email && (
+                    <div className="info-card">
+                      <div className="info-icon">📧</div>
+                      <div className="info-body">
+                        <label>Email</label>
+                        <p>{resume.email}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {resume.phone && (
+                    <div className="info-card">
+                      <div className="info-icon">📱</div>
+                      <div className="info-body">
+                        <label>Phone</label>
+                        <p>{resume.phone}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {resume.location && (
+                    <div className="info-card">
+                      <div className="info-icon">📍</div>
+                      <div className="info-body">
+                        <label>Location</label>
+                        <p>{resume.location}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {resume.linkedin && (
+                    <div className="info-card">
+                      <div className="info-icon">🔗</div>
+                      <div className="info-body">
+                        <label>LinkedIn</label>
+                        <p>
+                          <a href={`https://${resume.linkedin}`} target="_blank" rel="noreferrer">
+                            {resume.linkedin}
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {resume.github && (
+                    <div className="info-card">
+                      <div className="info-icon">💻</div>
+                      <div className="info-body">
+                        <label>GitHub</label>
+                        <p>
+                          <a href={`https://${resume.github}`} target="_blank" rel="noreferrer">
+                            {resume.github}
+                          </a>
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {languages.length > 0 && (
+                    <div className="info-card">
+                      <div className="info-icon">🌐</div>
+                      <div className="info-body">
+                        <label>Languages</label>
+                        <p>{languages.join(", ")}</p>
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+
+              </div>
+
+
+              {/* ── Skills ── */}
+              {extractedSkills.length > 0 && (
+                <div className="detail-section">
+                  <div className="section-header">
+                    <h2>🛠️ Extracted Skills</h2>
+                    <span className="count-badge">{extractedSkills.length} found</span>
+                  </div>
+                  <div className="skill-tags">
+                    {extractedSkills.map((skill, i) => (
+                      <span className="skill-tag" key={i}>{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+              {/* ── Technologies (if different from skills) ── */}
+              {technologies.length > 0 && (
+                <div className="detail-section">
+                  <div className="section-header">
+                    <h2>💻 Technologies</h2>
+                    <span className="count-badge">{technologies.length} found</span>
+                  </div>
+                  <div className="skill-tags">
+                    {technologies.map((tech, i) => (
+                      <span className="skill-tag tech-tag" key={i}>{tech}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+              {/* ── Education ── */}
+              {education.length > 0 && (
+                <div className="detail-section">
+                  <div className="section-header">
+                    <h2>🎓 Education</h2>
+                  </div>
+                  <div className="entry-list">
+                    {education.map((edu, i) => (
+                      <div className="entry-card" key={i}>
+                        <div className="entry-icon">🎓</div>
+                        <div className="entry-body">
+                          {edu.degree && <h4 className="entry-title">{edu.degree}</h4>}
+                          {edu.institution && <p className="entry-subtitle">{edu.institution}</p>}
+                          <div className="entry-meta-row">
+                            {edu.year && <span className="entry-meta">📅 {edu.year}</span>}
+                            {edu.cgpa && <span className="entry-meta">⭐ {edu.cgpa}</span>}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+              {/* ── Experience ── */}
+              {experience.length > 0 && (
+                <div className="detail-section">
+                  <div className="section-header">
+                    <h2>💼 Experience</h2>
+                  </div>
+
+                  {isFresher ? (
+                    <div className="fresher-card">
+                      <span className="fresher-icon">🌱</span>
+                      <div>
+                        <h4>Fresher</h4>
+                        <p>No prior work experience — ready to start fresh!</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="entry-list">
+                      {experience.map((exp, i) => (
+                        <div className="entry-card" key={i}>
+                          <div className="entry-icon">💼</div>
+                          <div className="entry-body">
+                            {exp.title && <h4 className="entry-title">{exp.title}</h4>}
+                            <div className="entry-meta-row">
+                              {exp.company && <span className="entry-subtitle-inline">{exp.company}</span>}
+                              {exp.duration && <span className="entry-meta">📅 {exp.duration}</span>}
+                            </div>
+                            {exp.description && (
+                              <p className="entry-description">{exp.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+
+              {/* ── Projects ── */}
+              {projects.length > 0 && (
+                <div className="detail-section">
+                  <div className="section-header">
+                    <h2>🚀 Projects</h2>
+                    <span className="count-badge">{projects.length} found</span>
+                  </div>
+                  <div className="entry-list">
+                    {projects.map((proj, i) => (
+                      <div className="entry-card project-card" key={i}>
+                        <div className="entry-icon">🚀</div>
+                        <div className="entry-body">
+                          {proj.name && <h4 className="entry-title">{proj.name}</h4>}
+                          {proj.description && (
+                            <p className="entry-description">{proj.description}</p>
+                          )}
+                          {proj.technologies && proj.technologies.length > 0 && (
+                            <div className="project-tech-row">
+                              {proj.technologies.map((tech, j) => (
+                                <span className="tech-pill" key={j}>{tech}</span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+              {/* ── Certifications ── */}
+              {certifications.length > 0 && (
+                <div className="detail-section">
+                  <div className="section-header">
+                    <h2>📜 Certifications</h2>
+                    <span className="count-badge">{certifications.length} found</span>
+                  </div>
+                  <div className="cert-list">
+                    {certifications.map((cert, i) => (
+                      <div className="cert-item" key={i}>
+                        <span className="cert-dot">🏅</span>
+                        <span>{cert}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+              {/* ── Achievements ── */}
+              {achievements.length > 0 && (
+                <div className="detail-section">
+                  <div className="section-header">
+                    <h2>🏆 Achievements</h2>
+                  </div>
+                  <div className="cert-list">
+                    {achievements.map((ach, i) => (
+                      <div className="cert-item" key={i}>
+                        <span className="cert-dot">🏆</span>
+                        <span>{ach}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+              {/* ── Recommendations ── */}
+              {recommendations.length > 0 && (
+                <div className="detail-section recommendations-section">
+                  <div className="section-header">
+                    <h2>💡 Recommendations</h2>
+                    <span className="count-badge">{recommendations.length} tips</span>
+                  </div>
+                  <div className="reco-list">
+                    {recommendations.map((rec, i) => (
+                      <div className="reco-item" key={i}>
+                        <span className="reco-number">{i + 1}</span>
+                        <span className="reco-text">{rec}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+
+            </div>  // end .analysis-results
+          )}
+
+
+          {/* ── Application Match Scores ── */}
+          {applications.length > 0 && (
+            <div className="applications-section">
+
+              <div className="section-header">
+                <h2>📊 Job Application Match Scores</h2>
+                <span className="count-badge">{applications.length} application{applications.length !== 1 ? "s" : ""}</span>
+              </div>
+
+              <div className="application-cards">
+                {applications.map((app) => (
+                  <div className="app-match-card" key={app._id}>
+
+                    <div className="app-match-header">
+                      <div>
+                        <h4>{app.jobId?.title || "Job"}</h4>
+                        <p>{app.jobId?.company || ""}</p>
+                      </div>
+                      <div
+                        className="match-score-circle"
+                        style={{
+                          background: `conic-gradient(${getScoreColor(app.matchScore)} ${(app.matchScore || 0) * 3.6}deg, #e2e8f0 0deg)`,
+                        }}
+                      >
+                        <div className="score-inner">
+                          <span className="score-num">{app.matchScore || 0}%</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="app-match-details">
+                      <span className="match-label" style={{ color: getScoreColor(app.matchScore) }}>
+                        {getScoreLabel(app.matchScore)}
+                      </span>
+                      <span className={`app-status ${app.status?.toLowerCase()}`}>
+                        {app.status}
+                      </span>
+                    </div>
+
+                    {app.matchedSkills?.length > 0 && (
+                      <div className="matched-skills-row">
+                        <label>Matched:</label>
+                        <div className="mini-tags">
+                          {app.matchedSkills.map((s, i) => (
+                            <span className="mini-tag matched" key={i}>{s}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {app.missingSkills?.length > 0 && (
+                      <div className="matched-skills-row">
+                        <label>Missing:</label>
+                        <div className="mini-tags">
+                          {app.missingSkills.map((s, i) => (
+                            <span className="mini-tag missing" key={i}>{s}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          )}
+
+        </div>
+        {/* end .resume-content */}
+
+
+      </div>
+      {/* end .resume-container */}
+
+    </div>
+  );
+}
+
+
+export default ResumeUpload;

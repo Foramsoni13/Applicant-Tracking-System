@@ -1,0 +1,86 @@
+/* ==========================================================
+   Analytics.css — Admin Analytics & System Reports
+   Text Color: Pure Black (#000000)
+   ========================================================== */
+
+.charts-grid-admin {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 992px) {
+  .charts-grid-admin {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card-admin {
+  background-color: #ffffff;
+  border: 1px solid #B7D8EA;
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 20px rgba(36, 130, 193, 0.06);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-card-admin:hover {
+  border-color: #68AAD0;
+  box-shadow: 0 6px 24px rgba(36, 130, 193, 0.12);
+}
+
+.chart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #B7D8EA;
+  padding-bottom: 14px;
+}
+
+.chart-card-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #000000 !important;
+  margin: 0 0 3px 0;
+}
+
+.chart-card-header p {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #000000 !important;
+  margin: 0;
+}
+
+/* Analytics Filter Bar */
+.admin-toolbar select {
+  color: #000000 !important;
+}
+
+.admin-toolbar label {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Recharts Legend & Tooltip Styling */
+.recharts-legend-item-text {
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+}
+
+.recharts-default-tooltip {
+  background-color: #ffffff !important;
+  border: 1px solid #B7D8EA !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 16px rgba(36, 130, 193, 0.15) !important;
+  color: #000000 !important;
+}
+
+.recharts-tooltip-item-list li {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}

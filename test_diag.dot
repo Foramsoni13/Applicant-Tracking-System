@@ -1,0 +1,42 @@
+
+digraph ClassDiagram {
+    graph [
+        rankdir=TB,
+        splines=ortho,
+        nodesep=0.8,
+        ranksep=1.0,
+        bgcolor="white",
+        pad="0.5",
+        fontname="Helvetica"
+    ];
+
+    node [
+        fontname="Helvetica",
+        fontsize=10,
+        shape=plaintext
+    ];
+
+    edge [
+        fontname="Helvetica",
+        fontsize=9,
+        color="black"
+    ];
+
+    User [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+        <TR><TD ALIGN="CENTER"><B>User</B></TD></TR>
+        <HR/>
+        <TR><TD ALIGN="LEFT">- userId : String<BR/>- name : String<BR/>- email : String<BR/>- password : String<BR/>- phone : String<BR/>- role : String</TD></TR>
+        <HR/>
+        <TR><TD ALIGN="LEFT">+ register() : void<BR/>+ login() : Boolean<BR/>+ logout() : void</TD></TR>
+    </TABLE>>];
+
+    Candidate [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+        <TR><TD ALIGN="CENTER"><B>Candidate</B></TD></TR>
+        <HR/>
+        <TR><TD ALIGN="LEFT">- candidateId : String<BR/>- skills : String[]<BR/>- education : String<BR/>- experience : String</TD></TR>
+        <HR/>
+        <TR><TD ALIGN="LEFT">+ profile() : void<BR/>+ searchJobs() : List&lt;Job&gt;<BR/>+ applyForJob() : Application<BR/>+ trackApplication() : String<BR/>+ viewResumeScore() : Float</TD></TR>
+    </TABLE>>];
+
+    User -> Candidate [dir=back, arrowhead=onormal, label=""];
+}

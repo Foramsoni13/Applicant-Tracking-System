@@ -1,0 +1,352 @@
+.ats-resume-scanner-container {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  user-select: none;
+}
+
+/* Background Soft Glow Aura */
+.ats-scanner-glow-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(36, 130, 193, 0.18) 0%, rgba(183, 216, 234, 0.08) 60%, transparent 80%);
+  filter: blur(20px);
+  border-radius: 50%;
+  animation: auraPulse 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes auraPulse {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+/* Central 3D Vector Resume Document */
+.ats-resume-sheet {
+  position: relative;
+  width: 230px;
+  height: 310px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(214, 233, 242, 0.95);
+  border-radius: 16px;
+  padding: 20px 18px;
+  box-shadow: 
+    0 16px 36px rgba(36, 130, 193, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  overflow: hidden;
+  animation: resumeHover 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes resumeHover {
+  0% {
+    transform: translateY(0px) rotateY(-2deg) rotateX(3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateY(2deg) rotateX(-2deg);
+  }
+  100% {
+    transform: translateY(0px) rotateY(-2deg) rotateX(3deg);
+  }
+}
+
+/* Animated AI Scanning Laser Bar */
+.ats-scan-laser-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #2482c1 20%, #68aad0 50%, #2482c1 80%, transparent 100%);
+  box-shadow: 0 0 12px #2482c1, 0 0 24px rgba(36, 130, 193, 0.6);
+  z-index: 20;
+  animation: scanSweep 2.4s ease-in-out infinite;
+}
+
+@keyframes scanSweep {
+  0% {
+    top: 4%;
+    opacity: 0.2;
+  }
+  15% {
+    opacity: 1;
+  }
+  50% {
+    top: 92%;
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 4%;
+    opacity: 0.2;
+  }
+}
+
+.laser-glow-core {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(36, 130, 193, 0.12) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Resume Document Header */
+.ats-resume-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ats-resume-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #eff6ff;
+  border: 1px solid #b7d8ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ats-resume-header-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.skeleton-line {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.line-title {
+  width: 80%;
+  height: 8px;
+  background: #2482c1;
+}
+
+.line-sub {
+  width: 55%;
+  background: #94a3b8;
+}
+
+.ats-resume-divider {
+  width: 100%;
+  height: 1px;
+  background: #e2e8f0;
+  margin-bottom: 14px;
+}
+
+/* Resume Document Body */
+.ats-resume-body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.skeleton-section-label {
+  font-size: 8px;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+
+.line-long { width: 95%; }
+.line-med { width: 75%; }
+.line-short { width: 50%; }
+
+.highlight-blue {
+  background: #68aad0;
+}
+
+.highlight-green {
+  background: #2482c1;
+  width: 65%;
+}
+
+.ats-mini-skill-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.line-tiny { width: 35px; height: 5px; background: #94a3b8; }
+.line-tiny-2 { width: 45px; height: 5px; background: #94a3b8; }
+
+.ats-mini-skill-bar {
+  flex: 1;
+  height: 5px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ats-mini-skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #68aad0 0%, #2482c1 100%);
+  border-radius: 999px;
+}
+
+/* Floating Badges */
+.ats-scanner-badge {
+  position: absolute;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(214, 233, 242, 0.95);
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 24px rgba(36, 130, 193, 0.14);
+}
+
+.badge-match {
+  top: 10px;
+  right: -25px;
+  animation: floatMatch 3.5s ease-in-out infinite;
+}
+
+@keyframes floatMatch {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-6px) scale(1.02); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+.badge-verify {
+  bottom: 25px;
+  left: -28px;
+  animation: floatVerify 3.8s ease-in-out infinite 0.5s;
+}
+
+@keyframes floatVerify {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(6px) scale(1.02); }
+  100% { transform: translateY(0px) scale(1); }
+}
+
+.badge-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-icon {
+  background: #eff6ff;
+  color: #2482c1;
+  border: 1px solid #b7d8ea;
+}
+
+.search-icon {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.badge-subtitle {
+  font-size: 9px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* Floating Skill Chips */
+.ats-floating-chip {
+  position: absolute;
+  z-index: 25;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #d6e9f2;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #2482c1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(36, 130, 193, 0.08);
+}
+
+.chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2482c1;
+}
+
+.chip-1 {
+  top: 15px;
+  left: 0px;
+  animation: chipFloat1 4s ease-in-out infinite;
+}
+
+@keyframes chipFloat1 {
+  0% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-8px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(-3deg); }
+}
+
+.chip-2 {
+  bottom: 85px;
+  right: -15px;
+  animation: chipFloat2 4.5s ease-in-out infinite 0.8s;
+}
+
+@keyframes chipFloat2 {
+  0% { transform: translateY(0) rotate(3deg); }
+  50% { transform: translateY(7px) rotate(1deg); }
+  100% { transform: translateY(0) rotate(3deg); }
+}
+
+.chip-3 {
+  bottom: 0px;
+  right: 25px;
+  animation: chipFloat3 3.8s ease-in-out infinite 0.3s;
+}
+
+@keyframes chipFloat3 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .ats-resume-scanner-container {
+    transform: scale(0.85);
+    margin-bottom: 12px;
+  }
+}

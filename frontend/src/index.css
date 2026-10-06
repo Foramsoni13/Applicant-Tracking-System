@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Final ATS Color System Tokens — Pure Black Text #000000 Everywhere */
+  --primary-blue: #8DBBD7;
+  --light-blue: #B7D8EA;
+  --sky-blue: #68AAD0;
+  --accent-blue: #2482C1;
+  --very-light-blue: #D6E9F2;
+  --text-dark: #000000;
+
+  --primary: #8DBBD7;
+  --primary-hover: #68AAD0;
+  --primary-light: #D6E9F2;
+
+  --text-main: #000000;
+  --text-muted: #000000;
+  --text-light: #000000;
+
+  --border: #B7D8EA;
+  --border-active: #68AAD0;
+  --border-focus: #2482C1;
+  
+  --bg-main: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 200ms ease-in-out;
+}
+
+/* Global Reset & Typography — All Text Pure Black #000000 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, label, div, small, strong, b, td, th {
+  color: #000000;
+  font-weight: 700;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; }
+p  { font-size: 0.925rem; color: #000000; }
+
+/* ATS Selection & Caret Color Accents — #2482C1 */
+* {
+  caret-color: #2482C1 !important;
+}
+
+::selection {
+  background-color: #B7D8EA !important;
+  color: #000000 !important;
+}
+
+::-moz-selection {
+  background-color: #B7D8EA !important;
+  color: #000000 !important;
+}
+
+/* Global Custom Cursor Overrides */
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* Global Button System — All Button Text Pure Black #000000 */
+.btn, .btn-primary, .btn-secondary, .btn-danger, .btn-action {
+  font-family: inherit;
+  font-size: 0.925rem;
+  font-weight: 700;
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  border: 1px solid #68AAD0;
+  outline: none;
+  white-space: nowrap;
+  color: #000000 !important;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #B7D8EA !important;
+  color: #000000 !important;
+  border: 1px solid #68AAD0 !important;
+  box-shadow: 0 2px 8px rgba(36, 130, 193, 0.15);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #8DBBD7 !important;
+  border-color: #2482C1 !important;
+  color: #000000 !important;
+  box-shadow: 0 4px 12px rgba(36, 130, 193, 0.25);
+}
+
+.btn-secondary {
+  background-color: #D6E9F2 !important;
+  color: #000000 !important;
+  border: 1px solid #B7D8EA !important;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #B7D8EA !important;
+  border-color: #68AAD0 !important;
+  color: #000000 !important;
+}
+
+.btn-danger {
+  background-color: #B7D8EA !important;
+  color: #000000 !important;
+  border: 1px solid #68AAD0 !important;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #8DBBD7 !important;
+  border-color: #2482C1 !important;
+  color: #000000 !important;
+}
+
+.btn:disabled, .btn-primary:disabled, .btn-secondary:disabled, .btn-danger:disabled {
+  opacity: 0.55;
+  cursor: not-allowed !important;
+}
+
+/* Global Form Controls — Text and Placeholders Pure Black #000000 */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+input[type="date"],
+select,
+textarea {
+  font-family: inherit;
+  font-size: 0.925rem;
+  color: #000000 !important;
+  background-color: #ffffff;
+  border: 1px solid #B7D8EA;
+  border-radius: 10px;
+  height: 44px;
+  padding: 0 14px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #000000 !important;
+  opacity: 0.8;
+}
+
+textarea {
+  height: auto;
+  padding: 12px 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #2482C1 !important;
+  box-shadow: 0 0 0 2px #D6E9F2 !important;
+}
+
+/* Common Card Utility */
+.saas-card {
+  background-color: #ffffff;
+  border: 1px solid #B7D8EA;
+  border-radius: 10px;
+  padding: 24px;
+  color: #000000;
+}
+
+/* Common Table Utility */
+.saas-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.saas-table th {
+  background-color: #D6E9F2;
+  color: #000000;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 16px;
+  border-bottom: 1px solid #B7D8EA;
+}
+
+.saas-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #B7D8EA;
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+.saas-table tbody tr:hover {
+  background-color: #D6E9F2;
+}
+
+/* Utility Animations */
+.animate-fade-in {
+  animation: fadeIn 200ms ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

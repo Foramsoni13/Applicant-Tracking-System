@@ -1,0 +1,494 @@
+/* ==========================================================
+   DashboardHome.css — ATS HR Dashboard Theme (Matching Mockup)
+========================================================== */
+
+.hr-dashboard-home {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0F172A;
+}
+
+/* Header Row */
+.hr-workspace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 4px;
+}
+
+.hr-workspace-title-block h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.02em;
+}
+
+.hr-workspace-title-block p {
+  font-size: 0.875rem;
+  color: #64748B;
+  margin: 0;
+}
+
+.btn-refresh-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  color: #2870A8;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-refresh-live:hover {
+  background-color: #F0F7FF;
+  border-color: #1D4ED8;
+  color: #1D4ED8;
+}
+
+.refresh-icon {
+  font-size: 0.95rem;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-icon {
+  animation: spin 0.8s linear infinite;
+}
+
+/* Section Blocks */
+.hr-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hr-section-subtitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* 4-Card Grid */
+.hr-stat-cards-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.hr-metric-card {
+  background: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  border-radius: 10px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hr-metric-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 112, 168, 0.08);
+}
+
+.hr-metric-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hr-metric-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #93C5FD;
+  background-color: #EFF6FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hr-metric-icon {
+  font-size: 1rem;
+  color: #2870A8;
+}
+
+.hr-metric-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hr-metric-number {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 10px 0 4px 0;
+  line-height: 1.1;
+}
+
+.hr-metric-subtext {
+  font-size: 0.74rem;
+  color: #64748B;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Charts 2-Column Grid */
+.hr-charts-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+}
+
+.hr-chart-card {
+  background: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hr-chart-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.hr-chart-card-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.hr-chart-pill {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #2870A8;
+  border: 1.5px solid #2870A8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+}
+
+.hr-chart-body {
+  width: 100%;
+  flex: 1;
+}
+
+/* Donut Section */
+.hr-donut-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hr-donut-wrapper {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1;
+}
+
+.donut-center-lbl {
+  font-size: 0.68rem;
+  color: #64748B;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.hr-status-legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #E2E8F0;
+  padding-top: 12px;
+}
+
+.hr-status-legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #334155;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #E2E8F0;
+  background-color: #FFFFFF;
+}
+
+.legend-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-box-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1.5px solid #2870A8;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #1E293B;
+}
+
+.legend-count {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+/* Top Jobs Section */
+.hr-top-jobs-card {
+  background: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hr-top-jobs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hr-top-jobs-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.btn-view-all-jobs {
+  background: none;
+  border: none;
+  color: #2870A8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+
+.btn-view-all-jobs:hover {
+  text-decoration: underline;
+  color: #1D4ED8;
+}
+
+.hr-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+}
+
+.hr-clean-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.82rem;
+}
+
+.hr-clean-table th {
+  background-color: #F8FAFC;
+  color: #475569;
+  padding: 10px 14px;
+  font-weight: 600;
+  font-size: 0.76rem;
+  border-bottom: 1px solid #CBD5E1;
+  white-space: nowrap;
+}
+
+.hr-clean-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #E2E8F0;
+  color: #334155;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.hr-clean-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.hr-clean-table tbody tr:hover {
+  background-color: #F8FAFC;
+}
+
+.job-title-cell {
+  font-weight: 700;
+  color: #0F172A !important;
+}
+
+.job-company-cell {
+  color: #475569;
+}
+
+.app-count-pill-outline {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1.5px solid #2870A8;
+  color: #2870A8;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background-color: #FFFFFF;
+}
+
+.hr-rate-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hr-rate-bar-track {
+  width: 50px;
+  height: 6px;
+  background-color: #E2E8F0;
+  border: 1px solid #CBD5E1;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hr-rate-bar-thumb {
+  height: 100%;
+  background-color: #2870A8;
+  border-radius: 999px;
+}
+
+.hr-rate-num {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.hr-status-pill-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1.5px solid #2870A8;
+  color: #2870A8;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background-color: #FFFFFF;
+}
+
+.job-date-cell {
+  color: #64748B;
+  font-size: 0.76rem;
+}
+
+/* Skeleton Loading State */
+.hr-dashboard-home.loading-state {
+  opacity: 0.6;
+}
+
+.skeleton-header {
+  height: 60px;
+  background: #E2E8F0;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.skeleton-card {
+  height: 100px;
+  background: #E2E8F0;
+  border-radius: 8px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+  .hr-stat-cards-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .hr-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hr-stat-cards-4 {
+    grid-template-columns: 1fr;
+  }
+  .hr-workspace-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .btn-refresh-live {
+    width: 100%;
+    justify-content: center;
+  }
+}

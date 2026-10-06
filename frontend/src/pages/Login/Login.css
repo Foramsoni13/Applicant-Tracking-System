@@ -1,0 +1,447 @@
+/* ==========================================================================
+   AI-ATS DUAL-PANE SPLIT LOGIN PAGE (WITH 3D RECRUITMENT NETWORK ANIMATION)
+   Left: Royal/Dark Blue Visual Experience with 3D Isometric Animation
+   Right: Clean High-Conversion Auth Card
+   ========================================================================== */
+
+@import "../Register/Register.css";
+
+.split-login-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f0f6fa;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(141, 187, 215, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(36, 130, 193, 0.15) 0%, transparent 45%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Central Dual-Pane Container */
+.split-login-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1060px;
+  min-height: 640px;
+  background: #ffffff;
+  border: 1px solid #B7D8EA;
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 50px rgba(15, 35, 58, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  position: relative;
+  animation: splitCardEnter 0.35s ease-out forwards;
+}
+
+@keyframes splitCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   LEFT PANEL — #8DBBD7 SWATCH BLUE 3D VISUAL STUDIO
+   ========================================================================== */
+.split-visual-panel {
+  flex: 1.15;
+  background: radial-gradient(circle at 50% 35%, #8dbbd7 0%, #76a9c8 42%, #558eb2 78%, #3e779c 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 36px 36px;
+  overflow: hidden;
+  color: #ffffff;
+  z-index: 1;
+}
+
+/* 3D WebGL Canvas Layer inside the Blue Panel */
+.split-canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.split-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+  display: block;
+}
+
+/* Splash-Identical Ambient Radial Glow Overlays */
+.visual-ambient-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.visual-radial-glow-primary {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(141, 187, 215, 0.35) 0%, rgba(36, 130, 193, 0.15) 55%, transparent 75%);
+  filter: blur(80px);
+  animation: visualAuraPulse 6s ease-in-out infinite alternate;
+}
+
+.visual-radial-glow-secondary {
+  position: absolute;
+  bottom: 0%;
+  left: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, transparent 70%);
+  filter: blur(70px);
+}
+
+.visual-ambient-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 45%, rgba(4, 12, 22, 0.75) 100%);
+}
+
+@keyframes visualAuraPulse {
+  0% { transform: translate(-50%, -50%) scale(0.94); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
+}
+
+/* Brand Header on top of Blue Panel */
+.split-visual-header {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.split-visual-logo {
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.split-visual-brand-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   RIGHT PANEL — CLEAN WHITE AUTH FORM
+   ========================================================================== */
+.split-form-panel {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px 44px;
+  position: relative;
+  z-index: 10;
+}
+
+.split-form-inner {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.split-form-header {
+  margin-bottom: 24px;
+}
+
+.split-form-header h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #000000;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+}
+
+.split-form-header p {
+  font-size: 0.9rem;
+  color: #000000;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Role / Quick Pill Options */
+.split-role-pills {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.role-pill {
+  flex: 1;
+  padding: 8px 12px;
+  background: #f1f7fc;
+  border: 1px solid #B7D8EA;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.role-pill.active {
+  background: #D6E9F2;
+  border-color: #8DBBD7;
+  color: #000000;
+}
+
+/* Social / Quick Action Buttons */
+.split-social-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.social-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 42px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: 1px solid #B7D8EA;
+  background: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.social-auth-btn.linkedin-btn {
+  background: #8DBBD7;
+  color: #000000;
+  border-color: #8DBBD7;
+}
+
+.social-auth-btn.linkedin-btn:hover {
+  background: #68AAD0;
+}
+
+.social-auth-btn.google-btn:hover {
+  background: #f8fafc;
+  border-color: #8DBBD7;
+}
+
+/* Split Divider */
+.split-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 18px 0;
+  color: #000000;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.split-divider::before,
+.split-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #B7D8EA;
+}
+
+.split-divider span {
+  padding: 0 12px;
+}
+
+/* Form Styles */
+.split-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.split-form .form-field label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.split-form .form-field input {
+  height: 44px;
+  border-radius: 8px;
+  border: 1.5px solid #B7D8EA;
+  padding: 0 14px;
+  font-size: 0.94rem;
+  color: #000000;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.split-form .form-field input:focus {
+  border-color: #8DBBD7;
+  box-shadow: 0 0 0 3px rgba(141, 187, 215, 0.25);
+}
+
+/* Remember me & Forgot row */
+.form-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -4px;
+  font-size: 0.85rem;
+}
+
+.remember-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000000;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.remember-checkbox-label input {
+  width: 16px;
+  height: 16px;
+  accent-color: #8DBBD7;
+  cursor: pointer;
+}
+
+.split-forgot-link {
+  color: #2482C1;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.split-forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Primary Submit Button matching #8DBBD7 App Theme */
+.split-submit-btn {
+  height: 46px;
+  background: #8DBBD7;
+  color: #000000;
+  border: 1px solid #8DBBD7;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(141, 187, 215, 0.35);
+  transition: all 0.2s ease;
+  margin-top: 6px;
+}
+
+.split-submit-btn:hover {
+  background: #68AAD0;
+  border-color: #68AAD0;
+  box-shadow: 0 6px 18px rgba(141, 187, 215, 0.45);
+  transform: translateY(-1px);
+}
+
+.split-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Footer Link */
+.split-form-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: #000000;
+  font-weight: 600;
+}
+
+.split-form-footer .auth-link {
+  color: #2482C1;
+  font-weight: 800;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.split-form-footer .auth-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Tablets & Mobile)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .split-login-card {
+    flex-direction: column;
+    max-width: 520px;
+    min-height: auto;
+  }
+
+  .split-visual-panel {
+    min-height: 280px;
+    padding: 24px;
+  }
+
+  .split-visual-footer {
+    display: none;
+  }
+
+  .split-form-panel {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .split-login-wrapper {
+    padding: 12px;
+  }
+
+  .split-visual-panel {
+    min-height: 220px;
+    padding: 18px;
+  }
+
+  .split-form-panel {
+    padding: 24px 16px;
+  }
+
+  .split-form-header h2 {
+    font-size: 1.5rem;
+  }
+}

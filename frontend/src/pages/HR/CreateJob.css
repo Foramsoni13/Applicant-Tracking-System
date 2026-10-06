@@ -1,0 +1,600 @@
+/* ==========================================================
+   CreateJob.css — ATS HR Create Job Responsive Theme
+   Fully responsive at 100% desktop zoom and various screen sizes
+========================================================== */
+
+.create-job-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0F172A;
+}
+
+/* Header */
+.create-job-workspace-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.create-job-workspace-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.create-job-workspace-header p {
+  font-size: 0.875rem;
+  color: #64748B;
+  margin: 0;
+}
+
+/* 2-Column Split Layout */
+.create-job-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Main Form Column */
+.create-job-main-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.hr-create-section-card {
+  background: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+.hr-create-section-header {
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.hr-create-section-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+}
+
+.hr-create-section-header p {
+  font-size: 0.8rem;
+  color: #64748B;
+  margin: 0;
+}
+
+/* Form Fields */
+.create-fields-2col {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-field-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-field-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field-item label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.field-sub-helper {
+  font-size: 0.75rem;
+  color: #64748B;
+  margin-top: 2px;
+}
+
+.field-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field-box-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2870A8;
+  font-size: 1rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.field-input-box input[type="text"],
+.field-input-box input[type="date"],
+.field-input-box input {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 42px !important;
+  padding: 0 14px 0 42px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid #2870A8 !important;
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  font-size: 0.88rem !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  transition: all 0.15s ease !important;
+}
+
+.field-input-box input::placeholder {
+  color: #64748B !important;
+  opacity: 0.8 !important;
+}
+
+.field-input-box select {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 42px !important;
+  padding: 0 36px 0 42px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid #2870A8 !important;
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  font-size: 0.88rem !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg stroke='%232870A8' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 16px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.field-input-box input:focus,
+.field-input-box select:focus,
+.field-textarea-box textarea:focus {
+  border-color: #1D4ED8 !important;
+  box-shadow: 0 0 0 3px rgba(40, 112, 168, 0.12) !important;
+}
+
+.field-textarea-box {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field-textarea-box textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 120px !important;
+  padding: 12px 14px !important;
+  border-radius: 8px !important;
+  border: 1.5px solid #2870A8 !important;
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  font-size: 0.88rem !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  resize: vertical !important;
+  transition: all 0.15s ease !important;
+}
+
+.field-textarea-box textarea::placeholder {
+  color: #64748B !important;
+  opacity: 0.8 !important;
+}
+
+/* Right Sidebar Panels */
+.create-job-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 300px;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.hr-create-side-card {
+  background: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  border-radius: 10px;
+  padding: 18px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.hr-create-side-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.hr-create-side-header h3 {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+}
+
+.side-opt-tag {
+  font-size: 0.74rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+/* Dropzone */
+.company-logo-upload-dropzone {
+  position: relative;
+  border: 1.5px dashed #2870A8;
+  border-radius: 8px;
+  padding: 22px 14px;
+  text-align: center;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.company-logo-upload-dropzone:hover {
+  background-color: #F0F7FF;
+  border-color: #1D4ED8;
+}
+
+.logo-file-input-hidden {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-dropzone-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropzone-cloud-icon {
+  font-size: 1.8rem;
+  color: #2870A8;
+}
+
+.dropzone-text-primary {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #2870A8;
+}
+
+.dropzone-text-muted {
+  font-size: 0.74rem;
+  color: #64748B;
+}
+
+.logo-uploaded-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo-uploaded-preview img {
+  max-height: 48px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.logo-filename {
+  font-size: 0.75rem;
+  color: #0F172A;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+/* Checklist */
+.checklist-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checklist-row-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #2870A8;
+  background-color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #334155;
+  transition: all 0.15s ease;
+}
+
+.checklist-row-box.completed {
+  border-color: #2870A8;
+  background-color: #F0F7FF;
+  color: #0F172A;
+  font-weight: 600;
+}
+
+.check-icon {
+  font-size: 0.95rem;
+  color: #94A3B8;
+  flex-shrink: 0;
+}
+
+.check-icon.done {
+  color: #2870A8;
+}
+
+/* Actions Row */
+.create-job-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-create-cancel {
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 8px;
+  border: 1.5px solid #2870A8 !important;
+  background-color: #FFFFFF !important;
+  color: #2870A8 !important;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-create-cancel,
+.btn-create-cancel * {
+  color: #2870A8 !important;
+}
+
+.btn-create-cancel:hover {
+  background-color: #F0F7FF !important;
+  border-color: #1D4ED8 !important;
+  color: #1D4ED8 !important;
+}
+
+.btn-create-submit {
+  height: 42px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: none !important;
+  background-color: #2870A8 !important;
+  color: #FFFFFF !important;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(40, 112, 168, 0.25);
+  white-space: nowrap;
+}
+
+.btn-create-submit,
+.btn-create-submit *,
+.btn-create-submit span,
+.btn-create-submit svg,
+.btn-create-submit .btn-icon {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+.btn-create-submit:hover:not(:disabled) {
+  background-color: #1E5B8A !important;
+}
+
+.btn-create-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==================== POSTER SECTION ==================== */
+.poster-section {
+  background: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.poster-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 2px 0;
+}
+
+.poster-header p {
+  font-size: 0.82rem;
+  color: #64748B;
+  margin: 0 0 16px 0;
+}
+
+/* Active Selected Poster Preview Box */
+.selected-poster-preview {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #F8FAFC;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.selected-poster-preview h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 12px 0;
+}
+
+.selected-poster-preview img {
+  max-width: 100%;
+  width: auto;
+  max-height: 380px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  display: block;
+}
+
+/* Posters Grid */
+.poster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.poster-card {
+  position: relative;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  aspect-ratio: 3/4;
+  background: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.poster-card:hover {
+  border-color: #2870A8;
+}
+
+.poster-card.selected {
+  border-color: #1D4ED8;
+  box-shadow: 0 0 0 2.5px rgba(29, 78, 216, 0.25);
+}
+
+.poster-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.selected-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #1D4ED8;
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.save-poster-btn {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2870A8;
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.save-poster-btn:hover:not(:disabled) {
+  background-color: #1E5B8A;
+}
+
+/* ==================== RESPONSIVE BREAKPOINTS ==================== */
+@media (max-width: 1080px) {
+  .create-job-layout-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .create-job-sidebar {
+    width: 100%;
+  }
+
+  .create-job-actions-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .create-fields-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .poster-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

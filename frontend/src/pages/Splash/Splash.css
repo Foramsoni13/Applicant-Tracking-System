@@ -1,0 +1,170 @@
+/* ==========================================================================
+   AI-ATS 3D ISOMETRIC RECRUITMENT NETWORK — #8DBBD7 SWATCH BLUE THEME
+   Unified Palette: #8DBBD7 (Primary), #B7D8EA (Light), #D6E9F2 (Very Light),
+   #2482C1 (Accent), #ffffff (White surfaces with pure black #000000 borders)
+   ========================================================================== */
+
+.iso-splash-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 35%, #8dbbd7 0%, #76a9c8 42%, #558eb2 78%, #3e779c 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99999;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+  overflow: hidden;
+  color: #000000;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 32px 24px;
+  box-sizing: border-box;
+}
+
+.iso-splash-root.iso-splash-exit {
+  opacity: 0;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+/* Ambient Radial Glow Overlays */
+.iso-ambient-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.iso-radial-glow.primary {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(141, 187, 215, 0.2) 55%, transparent 75%);
+  filter: blur(90px);
+  animation: ambientAuraPulse 6s ease-in-out infinite alternate;
+}
+
+.iso-radial-glow.secondary {
+  position: absolute;
+  bottom: 5%;
+  left: 15%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(183, 216, 234, 0.3) 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.iso-ambient-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 50%, rgba(62, 119, 156, 0.25) 100%);
+}
+
+@keyframes ambientAuraPulse {
+  0% { transform: translate(-50%, -50%) scale(0.94); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
+}
+
+/* 3D WebGL Canvas Layer (Always 100% visible and interactive) */
+.iso-canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.iso-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+/* ==========================================================================
+   CLEAN BRAND NAME & SUBTITLE BELOW ANIMATION (NO DARK POPUP BOX)
+   ========================================================================== */
+.iso-bottom-brand-bar {
+  position: absolute;
+  bottom: 28px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid #000000;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  animation: bottomBrandEnter 0.5s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes bottomBrandEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.iso-brand-emblem-small {
+  width: 32px;
+  height: 32px;
+  background: #D6E9F2;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iso-brand-name-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #000000;
+}
+
+.iso-brand-dot {
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.iso-brand-name-subtitle {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: -0.01em;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .iso-bottom-brand-bar {
+    bottom: 20px;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+
+  .iso-brand-name-title {
+    font-size: 1.05rem;
+  }
+
+  .iso-brand-name-subtitle {
+    font-size: 0.82rem;
+  }
+}

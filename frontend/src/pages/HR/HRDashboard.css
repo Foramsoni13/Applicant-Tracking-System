@@ -1,0 +1,159 @@
+/* ==========================================================
+   HRDashboard.css — Unified ATS HR Theme
+========================================================== */
+
+.hr-page {
+  background-color: #F8FAFC;
+  min-height: 100vh;
+}
+
+.hr-shell {
+  display: flex;
+  min-height: calc(100vh - 64px);
+}
+
+/* HR Sidebar */
+.hr-sidebar {
+  width: 250px;
+  background-color: #F8FAFC;
+  border-right: 1px solid #CBD5E1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.hr-sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.hr-category-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.hr-nav-cat-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hr-nav-cat-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #64748B;
+  padding: 0 4px 2px 4px;
+  letter-spacing: 0.02em;
+}
+
+.hr-nav-cat-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Sidebar Navigation Buttons matching mockup */
+.hr-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #2870A8;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hr-nav-btn:hover {
+  background-color: #EEF4F9;
+  border-color: #2870A8;
+  color: #2870A8;
+}
+
+.hr-nav-btn.active {
+  background-color: #EFF6FF;
+  color: #2870A8;
+  border-color: #2870A8;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(40, 112, 168, 0.08);
+}
+
+.hr-nav-btn .btn-icon {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  color: #2870A8;
+  flex-shrink: 0;
+}
+
+.hr-nav-btn .btn-label {
+  flex: 1;
+}
+
+/* Main Content Container */
+.hr-main-content {
+  flex: 1;
+  padding: 28px 36px 60px 36px;
+  background-color: #FFFFFF;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.hr-subpage-banner {
+  margin-bottom: 20px;
+}
+
+.hr-back-btn-blue {
+  background-color: #FFFFFF;
+  border: 1.5px solid #2870A8;
+  color: #2870A8;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.hr-back-btn-blue:hover {
+  background-color: #EEF4F9;
+  border-color: #1E40AF;
+  color: #1E40AF;
+}
+
+@media (max-width: 991px) {
+  .hr-sidebar {
+    position: fixed;
+    top: 64px;
+    bottom: 0;
+    left: -280px;
+    height: calc(100vh - 64px);
+    z-index: 2000;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    transition: left 0.25s ease;
+  }
+  .hr-sidebar.sidebar-open {
+    left: 0;
+  }
+  .hr-sidebar.sidebar-collapsed {
+    left: -280px;
+  }
+  .hr-main-content {
+    padding: 20px 16px;
+  }
+}
