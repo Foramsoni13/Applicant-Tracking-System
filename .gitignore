@@ -1,7 +1,30 @@
+# Node
+node_modules/
+
+# Environment files
 .env
-.DS_Store
+.env.*
+!.env.example
+
+# Python
 __pycache__/
 *.pyc
+venv/
+.venv/
+
+# macOS
+.DS_Store
+
+# Build
+dist/
+build/
+
+# Uploads
+uploads/
+
+# Generated files
 nltk_data/
-*.mov
 backend/image-processing-service/generated/
+
+# Large recordings
+*.mov
